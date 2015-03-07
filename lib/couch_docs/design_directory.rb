@@ -1,7 +1,7 @@
 class Hash
-  def deep_merge(other)
+  def my_deep_merge(other)
     self.merge(other) do |key, oldval, newval|
-      oldval.deep_merge(newval)
+      oldval.my_deep_merge(newval)
     end
   end
 end
@@ -31,7 +31,7 @@ module CouchDocs
       Dir["#{couch_view_dir}/**/*.{js,json}"].inject({}) do |memo, filename|
         DesignDirectory.
           a_to_hash(expand_file(filename)).
-          deep_merge(memo)
+          my_deep_merge(memo)
       end
     end
 
